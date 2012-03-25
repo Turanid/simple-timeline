@@ -54,15 +54,14 @@
 			height:18px;
 			top:-8px;
 			cursor:pointer;
-			background-image:url(i/point.png);
-			//background: none;
-			filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src=i/point.png, sizingMethod=scale);
-			background-repeat:no-repeat;
+			background:no-repeat url(i/point.png) 0 0;
 			}
 
 		.timeline td a:hover,
 		.timeline td a.act {
 			background-image:url(i/point_act.png);
-			//background:none;
-			filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src=i/point_act.png, sizingMethod=scale);
 			}
+
+.timeline_expand {
+	text-align:right;
+	}

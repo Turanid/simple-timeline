@@ -1,9 +1,12 @@
 (function($) {
+	'use strict';
 	$.simpleTimeline = function(opts) {
 		opts = $.extend({
 			dataTable: null,
 			yearFrom: null,
 			yearTo: null,
+			expandAll: false,
+			expandAllText: 'Expand all|Hide all',
 			startZIndex: 100,
 			dayRe: /^(\d+)/,
 			monthRe: /\.(\d+)/,
@@ -28,6 +31,7 @@
 
 		$(opts.dataTable).each(function() {
 			var	_this	= $(this),
+				_viewers = null,
 				zIndex = opts.startZIndex,
 				yearFrom = 0, yearTo = 0,
 				dateIndex = opts.withIcon ? 1 : 0,
@@ -96,30 +100,31 @@
 			table = tmplTable.replace('${years}', years.join('')).replace('${points}', points.join(''));
 			table = $(table);
 			years = $('td div', table);
-			viewer = tmplViewer.replace('${date}', maxDate).replace('${desc}', data[maxRowIndex].desc);
-			viewer = $(viewer);
 
 			table
 				.insertBefore(_this)
 				.click(function(e) {
 					var	_target = $(e.target),
-						rowIndex = _target.text(),
-						newViewer = null;
+						rowIndex = _target.text();
 					if ( _target.is('a') ) {
-						newViewer = $(tmplViewer.replace('${date}', data[rowIndex].date).replace('${desc}', data[rowIndex].desc));
-						viewer.replaceWith(newViewer);
-						viewer = newViewer.css('opacity', 0.1).fadeTo(300, 1);
+						_viewers
+							.hide()
+							.eq(rowIndex - 1)
+							.show()
+							.css('opacity', 0.1)
+							.fadeTo(300, 1);
 						$('a', table).removeClass(opts.actClass);
 						_target.addClass(opts.actClass);
 						return false;
 					}
 				});
-			viewer.insertBefore(_this);
 			_this.toggle(opts.saveTable);
 			
 			// Отрисовка точек
 			var	cellWidth = table.width() / years.length,
-				cellIndex = 0, pixelLeft = 0, dY = 0;
+				cellIndex = 0, pixelLeft = 0, dY = 0,
+				index, point, itemLink;
+
 			$.each(dataList, function(i, item) {
 				if ( !(index = item[0]) || !(point = data[index]) ) return;
 
@@ -129,6 +134,7 @@
 				point.nDay = new Date(point.year, point.month - 1, point.day).getTime() - new Date(point.year, 0, 0).getTime();
 				point.nDay = Math.round(point.nDay / milliseconds);
 				point.left = 100 * point.nDay / days;
+				point.act = point.date == maxDate;
 				
 				var	itemZ = zIndex,
 					itemCellIndex = point.year - yearFrom,
@@ -141,7 +147,7 @@
 
 				itemLink = $('<a href="#">' + index + '</a>')
 					.addClass(opts.withIcon ? point.className : '')
-					.addClass(point.date == maxDate ? opts.actClass : '')
+					.addClass(point.act ? opts.actClass : '')
 					.attr('title', $('<div/>').html(point.desc).text())
 					.css({ left: point.left + '%', zIndex: itemZ })
 					.hover(function() { this.style.zIndex = zIndex; }, function() { this.style.zIndex = itemZ; })
@@ -151,7 +157,26 @@
 				zIndex++;
 				cellIndex = itemCellIndex;
 				pixelLeft = itemPixelLeft;
+
+				$(tmplViewer.replace('${date}', point.date).replace('${desc}', point.desc))
+					.insertBefore(_this)
+					.toggle(point.act);
 			});
+
+			// Визуализация описаний
+			_viewers = _this.prevAll('.timeline_viewer');
+			if ( opts.expandAll ) {
+				opts.expandAllText = opts.expandAllText.split('|');
+				$('<div class="timeline_expand"><a href="#">' + opts.expandAllText[0] + '</a></div>')
+					.insertAfter(table)
+					.find('a')
+					.click(function() {
+						opts.expandAll = !opts.expandAll;
+						_viewers.toggle(!opts.expandAll);
+						$(this).html(opts.expandAll ? opts.expandAllText[0] : opts.expandAllText[1]);
+						return false;
+					});
+			}
 		});
 	};
 })(jQuery);
