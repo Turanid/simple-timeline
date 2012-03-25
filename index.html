@@ -53,6 +53,13 @@
 								saveTable: true
 							});
 						break;
+						case 6:
+							$('.timeline_data_2col').show();
+							$.simpleTimeline({
+								dataTable: '.timeline_data_2col',
+								expandAll: true
+							});
+						break;
 					}
 					_list.removeClass('on');
 					$(this).addClass('on');
@@ -67,11 +74,12 @@
 	<h1>Примеры использования таймлайна</h1>
 
 	<ul>
-		<li><a href="#" data-type="1">Стадартный двухколоночник</a></li>
-		<li><a href="#" data-type="2">Стадартный двухколоночник с таблицей</a></li>
-		<li><a href="#" data-type="3">Трехколоночник таблица</a></li>
-		<li><a href="#" data-type="4">Трехколоночник с интервалом годов</a></li>
-		<li><a href="#" data-type="5">Трехколоночник с таблицей</a></li>
+		<li><a href="#" data-type="1">1. Стадартный двухколоночник</a></li>
+		<li><a href="#" data-type="2">2. Стадартный двухколоночник с таблицей</a></li>
+		<li><a href="#" data-type="3">3. Трехколоночник таблица</a></li>
+		<li><a href="#" data-type="4">4. Трехколоночник с интервалом годов</a></li>
+		<li><a href="#" data-type="5">5. Трехколоночник с таблицей</a></li>
+		<li><a href="#" data-type="6">6. Двухколоночник с expandAll: true</a></li> 
 	</ul>
 
 	<table class="timeline_data timeline_data_2col">
