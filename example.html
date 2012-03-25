@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="ru-RU">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Simple Timeline</title>
+		<link href="timeline.css" rel="stylesheet">
+		<script src="http://yandex.st/jquery/1.7.2/jquery.min.js"></script>
+		<script src="jquery.simple-timeline.js"></script>
+		<script>
+		jQuery(function() {
+			$.simpleTimeline({
+				dataTable: '.timeline_data'
+			});
+		});
+		</script>
+</head>
+<body>
+	<h1>Стадартный двухколоночник</h1>
+
+	<table class="timeline_data">
+		<tbody>
+			<tr>
+				<td>02.03.2010</td>
+				<td>2 марта 2010 г. Россия и Хорватия подписали межправительственное соглашение, предусматривающее присоединение Хорватии к проекту «Южный поток». <a href="http://sstream.sh.ms1.ru/press-centr/novosti/novost/?tx_ttnews%5Btt_news%5D=195">Пресс-релиз</a></td>
+			</tr>
+			<tr class="tr-even tr-2">
+				<td>27.11.2009</td>
+				<td>27 ноября 2009 г. ОАО «Газпром» и Electricite de France (EDF) подписали Меморандум о взаимопонимании, предусматривающий возможность вхождения EDF в проект строительства морского участка газопровода «Южный поток». <a href="http://sstream.sh.ms1.ru/press-centr/novosti/novost/?tx_ttnews%5Btt_news%5D=92">Пресс-релиз</a></td>
+			</tr>
+		</tbody>
+	</table>
+</body>
+</html>
