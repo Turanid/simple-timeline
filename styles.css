@@ -1,0 +1,50 @@
+html,
+body {
+	margin:0;
+	padding:0;
+	font:13px/1.4 Arial, Helvetica, sans-serif;
+	color:#333;
+	}
+body {
+	padding:20px;
+	}
+a {
+	color:#4183C4;
+	text-decoration:underline;
+	}
+a:hover {
+	color:#CC0000;
+	text-decoration:underline;
+	}
+li a {
+	text-decoration:none;
+	border-bottom:1px dotted #4183C4;
+	}
+li a:hover {
+	text-decoration:none;
+	border-bottom:1px dotted #CC0000;
+	}
+.on,
+.on:hover {
+	color:#333;
+	border:0;
+	font-weight:bold;
+	}
+
+.timeline_data {
+	display:none;
+	border: 1px solid #999;
+	}
+	.timeline_data td {
+		border: 1px solid #999;
+		}
+
+.timeline td a.ru,
+.timeline td a.ru:hover {
+	width: 33px;
+	height: 24px;
+	top: -13px;
+	background:url(ru.png) !important;
+	//background:none;
+	filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src=ru.png, sizingMethod=scale) !important;
+	}

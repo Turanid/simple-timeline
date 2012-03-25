@@ -1,1 +1,114 @@
-My GitHub Page
+<!DOCTYPE html>
+<html lang="ru-RU">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Simple Timeline</title>
+		<link href="styles.css" rel="stylesheet">
+		<link href="src/timeline.css" rel="stylesheet">
+		<script src="http://yandex.st/jquery/1.7.2/jquery.min.js"></script>
+		<script src="src/jquery.simple-timeline.js"></script>
+		<script>
+		jQuery(function() {
+			var	_list = $('li a');
+			_list
+				.click(function() {
+					$('.timeline, .timeline_viewer').remove();
+					$('.timeline_data').hide();
+					switch ( parseInt($(this).data('type')) ) {
+						case 1:
+							$('.timeline_data_2col').show();
+							$.simpleTimeline({
+								dataTable: '.timeline_data_2col'
+							});
+						break;
+						case 2:
+							$('.timeline_data_2col').show();
+							$.simpleTimeline({
+								dataTable: '.timeline_data_2col',
+								saveTable: true
+							});
+						break;
+						case 3:
+							$('.timeline_data_3col').show();
+							$.simpleTimeline({
+								dataTable: '.timeline_data_3col',
+								withIcon: true
+							});
+						break;
+						case 4:
+							$('.timeline_data_3col').show();
+							$.simpleTimeline({
+								dataTable: '.timeline_data_3col',
+								yearFrom: 2009,
+								yearTo: 2010,
+								withIcon: true
+							});
+						break;
+						case 5:
+							$('.timeline_data_3col').show();
+							$.simpleTimeline({
+								dataTable: '.timeline_data_3col',
+								withIcon: true,
+								saveTable: true
+							});
+						break;
+					}
+					_list.removeClass('on');
+					$(this).addClass('on');
+					return false;
+				})
+				.eq(0)
+				.click();
+		});
+		</script>
+</head>
+<body>
+	<h1>Примеры использования таймлайна</h1>
+
+	<ul>
+		<li><a href="#" data-type="1">Стадартный двухколоночник</a></li>
+		<li><a href="#" data-type="2">Стадартный двухколоночник с таблицей</a></li>
+		<li><a href="#" data-type="3">Трехколоночник таблица</a></li>
+		<li><a href="#" data-type="4">Трехколоночник с интервалом годов</a></li>
+		<li><a href="#" data-type="5">Трехколоночник с таблицей</a></li>
+	</ul>
+
+	<table class="timeline_data timeline_data_2col">
+		<tbody>
+			<tr>
+				<td>09.07.2011</td>
+				<td>9 июля 2011 г. Самое последнее из событий в таблице</td>
+			</tr>
+			<tr>
+				<td>02.03.2010</td>
+				<td>2 марта 2010 г. Россия и Хорватия подписали межправительственное соглашение, предусматривающее присоединение Хорватии к проекту «Южный поток». <a href="http://sstream.sh.ms1.ru/press-centr/novosti/novost/?tx_ttnews%5Btt_news%5D=195">Пресс-релиз</a></td>
+			</tr>
+			<tr>
+				<td>27.11.2009</td>
+				<td>27 ноября 2009 г. ОАО «Газпром» и Electricite de France (EDF) подписали Меморандум о взаимопонимании, предусматривающий возможность вхождения EDF в проект строительства морского участка газопровода «Южный поток». <a href="http://sstream.sh.ms1.ru/press-centr/novosti/novost/?tx_ttnews%5Btt_news%5D=92">Пресс-релиз</a></td>
+			</tr>
+		</tbody>
+	</table>
+
+	<table class="timeline_data timeline_data_3col">
+		<tbody>
+			<tr>
+				<td>ru</td>
+				<td>09.07.2011</td>
+				<td>9 июля 2011 г. Самое последнее из случившихся событий</td>
+			</tr>
+			<tr>
+				<td>ru</td>
+				<td>02.03.2010</td>
+				<td>2 марта 2010 г. Россия и Хорватия подписали межправительственное соглашение, предусматривающее присоединение Хорватии к проекту «Южный поток». <a href="http://sstream.sh.ms1.ru/press-centr/novosti/novost/?tx_ttnews%5Btt_news%5D=195">Пресс-релиз</a></td>
+			</tr>
+			<tr>
+				<td>ru</td>
+				<td>27.11.2009</td>
+				<td>27 ноября 2009 г. ОАО «Газпром» и Electricite de France (EDF) подписали Меморандум о взаимопонимании, предусматривающий возможность вхождения EDF в проект строительства морского участка газопровода «Южный поток». <a href="http://sstream.sh.ms1.ru/press-centr/novosti/novost/?tx_ttnews%5Btt_news%5D=92">Пресс-релиз</a></td>
+			</tr>
+		</tbody>
+	</table>
+</body>
+</html>
