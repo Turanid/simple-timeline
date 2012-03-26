@@ -32,6 +32,7 @@
 		$(opts.dataTable).each(function() {
 			var	_this	= $(this),
 				_viewers = null,
+				_expandLink = null,
 				zIndex = opts.startZIndex,
 				yearFrom = 0, yearTo = 0,
 				dateIndex = opts.withIcon ? 1 : 0,
@@ -115,6 +116,7 @@
 							.fadeTo(300, 1);
 						$('a', table).removeClass(opts.actClass);
 						_target.addClass(opts.actClass);
+						$(table).trigger('point_click');
 						return false;
 					}
 				});
@@ -167,16 +169,20 @@
 			_viewers = _this.prevAll('.timeline_viewer');
 			if ( opts.expandAll ) {
 				opts.expandAllText = opts.expandAllText.split('|');
-				$('<div class="timeline_expand"><a href="#">' + opts.expandAllText[0] + '</a></div>')
+				_expandLink = $('<div class="timeline_expand"><a href="#">' + opts.expandAllText[0] + '</a></div>')
 					.insertAfter(table)
 					.find('a')
 					.click(function() {
 						opts.expandAll = !opts.expandAll;
 						_viewers.toggle(!opts.expandAll);
 						$('a', table).removeClass(opts.actClass);
-						$(this).html(opts.expandAll ? opts.expandAllText[0] : opts.expandAllText[1]);
+						_expandLink.html(opts.expandAll ? opts.expandAllText[0] : opts.expandAllText[1]);
 						return false;
 					});
+				$(table).bind('point_click', function() {
+					opts.expandAll = true;
+					_expandLink.html(opts.expandAll ? opts.expandAllText[0] : opts.expandAllText[1]);
+				});
 			}
 		});
 	};
