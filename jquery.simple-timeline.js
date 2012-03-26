@@ -173,6 +173,7 @@
 					.click(function() {
 						opts.expandAll = !opts.expandAll;
 						_viewers.toggle(!opts.expandAll);
+						$('a', table).removeClass(opts.actClass);
 						$(this).html(opts.expandAll ? opts.expandAllText[0] : opts.expandAllText[1]);
 						return false;
 					});
