@@ -24,14 +24,16 @@
 		var	milliseconds = 1000 * 60 * 60 * 24,
 			days = 365;
 
-		var	tmplTable	= '<table class="timeline"><thead><tr>${years}</tr></thead><tbody><tr>${points}</tr></tbody></table>',
-			tmplYears	= '<th style="width:${width}%">${year}</th>',
-			tmplPoints	= '<td style="width:${width}%"><div></div></td>',
-			tmplViewer	= '<div class="timeline_viewer"><em class="event_date">${date}</em><p class="event_content">${desc}</p></div>';
+		var	tmplTable		= '<table class="timeline"><thead><tr>${years}</tr></thead><tbody><tr>${points}</tr></tbody></table>',
+			tmplYears		= '<th style="width:${width}%">${year}</th>',
+			tmplPoints		= '<td style="width:${width}%"><div></div></td>',
+			tmplViewWrapper	= '<div class="events_all"></div>',
+			tmplViewer		= '<div class="timeline_viewer"><em class="event_date">${date}</em><p class="event_content">${desc}</p></div>';
 
 		$(opts.dataTable).each(function() {
 			var	_this	= $(this),
 				_viewers = null,
+				_viewWrapper = $(tmplViewWrapper),
 				_expandLink = null,
 				zIndex = opts.startZIndex,
 				yearFrom = 0, yearTo = 0,
@@ -127,6 +129,8 @@
 				cellIndex = 0, pixelLeft = 0, dY = 0,
 				index, point, itemLink;
 
+			_viewWrapper.insertBefore(_this);
+
 			$.each(dataList, function(i, item) {
 				if ( !(index = item[0]) || !(point = data[index]) ) return;
 
@@ -161,12 +165,12 @@
 				pixelLeft = itemPixelLeft;
 
 				$(tmplViewer.replace('${date}', point.date).replace('${desc}', point.desc))
-					.insertBefore(_this)
+					.appendTo(_viewWrapper)
 					.toggle(point.act);
 			});
 
 			// Визуализация описаний
-			_viewers = _this.prevAll('.timeline_viewer');
+			_viewers = _viewWrapper.find('.timeline_viewer');
 			if ( opts.expandAll ) {
 				opts.expandAllText = opts.expandAllText.split('|');
 				_expandLink = $('<div class="timeline_expand"><a href="#">' + opts.expandAllText[0] + '</a></div>')
