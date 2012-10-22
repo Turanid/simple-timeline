@@ -112,7 +112,8 @@
 					if ( _target.is('a') ) {
 						_viewers
 							.hide()
-							.eq(rowIndex - 1)
+							//.eq(rowIndex - 1)
+							.filter('[data-index="' + rowIndex + '"]')
 							.show()
 							.css('opacity', 0.1)
 							.fadeTo(300, 1);
@@ -165,6 +166,7 @@
 				pixelLeft = itemPixelLeft;
 
 				$(tmplViewer.replace('${date}', point.date).replace('${desc}', point.desc))
+					.attr('data-index', index)
 					.appendTo(_viewWrapper)
 					.toggle(point.act);
 			});
